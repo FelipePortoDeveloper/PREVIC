@@ -1,5 +1,3 @@
-# interface.py
-
 import streamlit as st
 from modelo import ConstrutorModelo
 from dados import TratamentoDados
@@ -17,7 +15,6 @@ dados = TratamentoDados("bruto.csv")
 df_original = dados.carregarDados()
 df_limpo = dados.limparDados()
 df = dados.preprocessarDados()
-colunas_utilizadas = [col for col in df.columns if col != variavel_alvo]
 
 map_sex = {1: "Homem", 2: "Mulher"}
 map_education = {
