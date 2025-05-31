@@ -4,9 +4,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 import pandas as pd
 
-from variaveis import colunas_utilizadas, variavel_alvo
-from dados import TratamentoDados
-
 class ConstrutorModelo:
     def __init__(self, dados: pd.DataFrame, colunas: list, alvo: str, tipo_modelo: str = "XGBoost"):
         self.dados = dados
@@ -37,7 +34,7 @@ class ConstrutorModelo:
         x = self.dados[self.colunas]
         y = self.dados[self.alvo]
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(
-            x, y, test_size=test_size, random_state=0, stratify=y
+            x, y, test_size=test_size, random_state=0
         )
 
     def treinar_modelo(self):
@@ -69,15 +66,3 @@ class ConstrutorModelo:
             "relatorio": report,
             "matriz_confusao": matrix
         }
-
-df = TratamentoDados("bruto.csv")
-df.carregarDados()
-df.limparDados()
-df = df.preprocessarDados()
-
-modelo = ConstrutorModelo(df, colunas_utilizadas, alvo=variavel_alvo, tipo_modelo="XGBoost")
-
-modelo.dividir_dados()
-modelo.treinar_modelo()
-
-print(modelo.avaliacao_geral())
