@@ -25,3 +25,5 @@ class TratamentoDados:
         dados_copy = self.dados.copy()
         colunasNumericas = dados_copy.select_dtypes(include=['float64', 'int64']).columns
         dados_copy[colunasNumericas] = self.scaler.fit_transform(self.dados[colunasNumericas])
+
+        return dados_copy
